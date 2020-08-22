@@ -1,7 +1,7 @@
 <template>
   <div class="login_container">
     <div class="login">
-      <img src="../assets/logo.png" alt="img" />
+    <div class="pic"><img src="../assets/b8014a90f603738d7c8316c6b11bb051f919ec0d.jpg" alt="img" /></div>
       <!--表单-->
       <el-form ref="form" :model="form" :rules="rule" label-width="80px">
         <el-form-item label="账户" prop="name">
@@ -15,6 +15,7 @@
         <el-button type="primary" @click="login" icon="el-icon-s-promotion">登录</el-button>
       </el-row>
       <!--表单-->
+      <el-button v-show="false" :plain="true"></el-button>
     </div>
   </div>
 </template>
@@ -48,6 +49,14 @@ export default {
           console.log(res)
           resolve(res)
         })
+      }).then(res => {
+        if (res.meta.status === 400) return this.$message.error('用户不存在或密码错误')
+        // 登陆成功
+        this.$message.success('登陆成功！')
+        // 保存 token值
+        window.sessionStorage.setItem('token', res.data.token)
+        // 跳转页面
+        this.$router.push('/home')
       })
     }
   }
@@ -69,15 +78,23 @@ export default {
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 img {
   height: 200px;
   width: 200px;
   background-color: #fff;
-  margin: 0 auto;
   border-radius: 50%;
-  border: 1px solid rgb(230, 227, 93);
-  box-shadow: 0 0 10px #eee;
+}
+.pic {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgb(51, 49, 49);
   transform: translate(0, -50%);
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
