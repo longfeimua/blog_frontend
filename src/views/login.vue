@@ -46,7 +46,6 @@ export default {
       // eslint-disable-next-line no-new
       new Promise((resolve, reject) => {
         loginPost({ username: username, password: password }).then(res => {
-          console.log(res)
           resolve(res)
         })
       }).then(res => {
@@ -55,6 +54,8 @@ export default {
         this.$message.success('登陆成功！')
         // 保存 token值
         window.sessionStorage.setItem('token', res.data.token)
+        // 保存登陆信息
+        this.$store.commit('login', res.data)
         // 跳转页面
         this.$router.push('/home')
       })
