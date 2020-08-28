@@ -52,7 +52,7 @@
       label="邮箱">
     </el-table-column>
     </el-table>
-    <el-pagination background layout="prev, pager, next" :total=this.tableData.sumPage*10>
+    <el-pagination @current-change="handleCurrentChange" background layout="prev, pager, next" :total=this.tableData.sumPage*10>
 </el-pagination>
     <!--用户表单展示列表    op-->
   </div>
@@ -82,11 +82,11 @@ export default {
       callback()
     }
     return {
+      listNum: 3, // 每页数据个数**config
       // 请求的所有用户数据
       tableData: {
         userlist: [],
         // eslint-disable-next-line no-undef
-        page: 1,
         sumPage: 1,
         mutiuser: []
       },
@@ -135,11 +135,14 @@ export default {
       this.$refs.clearForm.resetFields()
     },
     // 页码功能
-    changePageList (page) {
+    handleCurrentChange (page) {
       // 清空展示列表
       this.tableData.userlist = []
       // 根据页数添加对应页的数据
-      this.tableData.userlist.push(this.tableData.mutiuser.slice(page * 2 - 2, page * 2 - 1))
+      let i
+      for (i of this.tableData.mutiuser.slice(page * this.listNum - this.listNum, page * this.listNum)) {
+        this.tableData.userlist.push(i)
+      }
     }
   },
   created () {
@@ -151,10 +154,10 @@ export default {
     }).then(res => {
       let count
       for (count of res.data.users) {
-        this.tableData.sumPage = this.tableData.mutiuser.push(count) / 2 // 每页两个元素
+        this.tableData.sumPage = this.tableData.mutiuser.push(count) / this.listNum // 每页两个元素
       }
       // 给展示列表添加第一页数据
-      for (let i = 0; i < this.tableData.page * 2; i++) {
+      for (let i = 0; i < this.listNum; i++) {
         this.tableData.userlist.push(this.tableData.mutiuser[i])
       }
     })
