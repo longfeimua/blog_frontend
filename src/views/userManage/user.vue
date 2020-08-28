@@ -5,7 +5,7 @@
 <template>
   <div>
   <el-header class="">
-    <!--弹出框-->
+    <!--添加用户表单弹出框    op-->
     <el-popover placement="right" width="600" trigger="click">
     <el-form :span="12" label-width="80px" :model="user" :rules="rule" ref="clearForm">
   <el-form-item label="账户" prop="username">
@@ -29,8 +29,9 @@
   <el-button type="warning" style="margin-top: 10px;" slot="reference">添加用户 </el-button>
   </el-popover>
   </el-header>
-
-    <el-table :data="tableData" border style="width: 100%">
+    <!--添加用户表单弹出框   ed-->
+    <!--用户表单展示列表    op-->
+    <el-table :data="tableData.userlist" border style="width: 100%">
     <el-table-column
       prop="id"
       label="ID"
@@ -51,7 +52,9 @@
       label="邮箱">
     </el-table-column>
     </el-table>
-
+    <el-pagination background layout="prev, pager, next" :total=this.tableData.sumPage*10>
+</el-pagination>
+    <!--用户表单展示列表    op-->
   </div>
 </template>
 
@@ -80,7 +83,13 @@ export default {
     }
     return {
       // 请求的所有用户数据
-      tableData: [],
+      tableData: {
+        userlist: [],
+        // eslint-disable-next-line no-undef
+        page: 1,
+        sumPage: 1,
+        mutiuser: []
+      },
       // 表单数据
       user: {
         username: null,
@@ -89,7 +98,6 @@ export default {
         mobile: null,
         Repassword: null
       },
-      ifShow: false,
       // 规则验证
       rule: {
         username: [
@@ -111,6 +119,7 @@ export default {
     }
   },
   methods: {
+    // 添加用户 请求
     add () {
       // eslint-disable-next-line no-new
       new Promise((resolve, reject) => {
@@ -121,8 +130,16 @@ export default {
         console.log(res)
       })
     },
+    // 添加用户表单重置功能
     clear () {
       this.$refs.clearForm.resetFields()
+    },
+    // 页码功能
+    changePageList (page) {
+      // 清空展示列表
+      this.tableData.userlist = []
+      // 根据页数添加对应页的数据
+      this.tableData.userlist.push(this.tableData.mutiuser.slice(page * 2 - 2, page * 2 - 1))
     }
   },
   created () {
@@ -134,7 +151,11 @@ export default {
     }).then(res => {
       let count
       for (count of res.data.users) {
-        this.tableData.push(count)
+        this.tableData.sumPage = this.tableData.mutiuser.push(count) / 2 // 每页两个元素
+      }
+      // 给展示列表添加第一页数据
+      for (let i = 0; i < this.tableData.page * 2; i++) {
+        this.tableData.userlist.push(this.tableData.mutiuser[i])
       }
     })
   }
