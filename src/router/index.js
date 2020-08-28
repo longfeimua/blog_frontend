@@ -3,7 +3,6 @@ import VueRouter from 'vue-router'
 
 import Login from '../views/login.vue'
 import Home from '../views/home.vue'
-import storeManage from '../views/storeManage.vue'
 import profile from '../views/profile/user.vue'
 import user from '../views/userManage/user.vue'
 
@@ -13,7 +12,6 @@ const routes = [
   { path: '/', redirect: '/login' }, // 重定向
   { path: '/login', component: Login },
   { path: '/home', component: Home },
-  { path: '/storeManage', component: storeManage },
   { path: '/profile', component: profile },
   { path: '/user', component: user }
 ]

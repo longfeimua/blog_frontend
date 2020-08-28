@@ -1,16 +1,19 @@
 <template>
   <el-container style="height: 100%; background-color: #eee;border: 1px solid #eee">
   <!--Top栏 op#########################-->
-  <el-header class="top" height="44px">
+  <el-header class="top" height="88px">
     <!--管理系统名-->
+    <div class="logo">
+    <img src="../assets/b8014a90f603738d7c8316c6b11bb051f919ec0d.jpg" style="border-radius: 50%;  margin-right: 10px" width="60px" alt="">
     <h2>XXX后台管理系统</h2>
-    <div class="leftTop">
+    </div>
+    <div class="info">
     <!--账号部分信息展示-->
-    <i></i>
-    <span>管理员 </span>
+    <i class="el-icon-user"></i>
+    <span style="margin-right: 10px">欢迎！{{this.$store.state.name}}</span>
     <!--下拉菜单 -->
-    <el-dropdown @command="handleCommand">
-      <span class="el-dropdown-link ">
+    <el-dropdown trigger="click" @command="handleCommand">
+      <span class="el-dropdown-link">
         更多<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <el-dropdown-menu slot="dropdown">
@@ -23,15 +26,13 @@
   <!--Top栏 ed#############################-->
   <el-container>
   <!--Aside op#############################-->
-  <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-    <el-menu @open="handleOpen" :default-openeds="['1']">  <!--默认展开列表-->
+  <el-aside width="200px" style="background-color: #333">
+    <el-menu text-color="#fff" active-text-color="red" background-color="#333">  <!--默认展开列表-->
       <!--第1个el-menu   op-->
       <el-submenu index="1">
-        <template slot="title"><i class="el-icon-message"></i>用户</template>
-        <el-menu-item-group>
+        <template slot="title"><i class="el-icon-user"></i>用户</template>
           <el-menu-item @click="routeManage('/user')" index="1-1">用户管理</el-menu-item>
           <el-menu-item @click="routeManage" index="1-2">添加</el-menu-item>
-        </el-menu-item-group>
       </el-submenu>
       <!--第1个el-menu   ed-->
       <!--第2个el-menu   op-->
@@ -39,15 +40,15 @@
         <template slot="title"><i class="el-icon-message"></i>商品管理</template>
         <el-menu-item-group>
           <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
+          <el-menu-item index="2-1">选项1</el-menu-item>
+          <el-menu-item index="2-2">选项2</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
+          <el-menu-item index="2-3">选项3</el-menu-item>
         </el-menu-item-group>
         <el-submenu index="1-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项4-1</el-menu-item>
+          <el-menu-item index="2-4-1">选项4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
       <!--第2个el-menu   ed-->
@@ -56,15 +57,15 @@
         <template slot="title"><i class="el-icon-message"></i>商品管理</template>
         <el-menu-item-group>
           <template slot="title">分组一</template>
-          <el-menu-item index="1-1">选项1</el-menu-item>
-          <el-menu-item index="1-2">选项2</el-menu-item>
+          <el-menu-item index="3-1">选项1</el-menu-item>
+          <el-menu-item index="3-2">选项2</el-menu-item>
         </el-menu-item-group>
         <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
+          <el-menu-item index="3-3">选项3</el-menu-item>
         </el-menu-item-group>
-        <el-submenu index="1-4">
+        <el-submenu index="3-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项4-1</el-menu-item>
+          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
         </el-submenu>
       </el-submenu>
       <!--第3个el-menu   ed-->
@@ -126,12 +127,23 @@ export default {
 .top{
   display:flex;
   color:#eee;
-  line-height: 44px;
+  line-height: 88px;
   background-color: #333;
   justify-content: space-between;
-  padding: 0 2%;
+  padding: 0 1%;
 }
 h2{
   margin: 0;
+}
+.logo{
+  display: flex;
+  align-items: center;
+}
+.el-dropdown-link{
+  color: #eee;
+  cursor: pointer;
+}
+.el-icon-message,.el-icon-user{
+  color: #eee;
 }
 </style>
