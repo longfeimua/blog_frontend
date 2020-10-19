@@ -1,137 +1,49 @@
 <template>
-  <el-container style="height: 100%; background-color: #eee;border: 1px solid #eee">
-  <!--Top栏 op#########################-->
-  <el-header class="top" height="88px">
-    <!--管理系统名-->
-    <div class="logo">
-    <img src="../assets/b8014a90f603738d7c8316c6b11bb051f919ec0d.jpg" style="border-radius: 50%;  margin-right: 10px" width="60px" alt="">
-    <h2>XXX后台管理系统</h2>
-    </div>
-    <div class="info">
-    <!--账号部分信息展示-->
-    <i class="el-icon-user"></i>
-    <span style="margin-right: 10px">欢迎！{{this.$store.state.name}}</span>
-    <!--下拉菜单 -->
-    <el-dropdown trigger="click" @command="handleCommand">
-      <span class="el-dropdown-link">
-        更多<i class="el-icon-arrow-down el-icon--right"></i>
-      </span>
-      <el-dropdown-menu slot="dropdown">
-        <el-dropdown-item command="profile">个人信息</el-dropdown-item>
-        <el-dropdown-item command="clearToken" divided>注销</el-dropdown-item>
-      </el-dropdown-menu>
-    </el-dropdown>
-    </div>
-  </el-header>
-  <!--Top栏 ed#############################-->
-  <el-container>
-  <!--Aside op#############################-->
-  <el-aside width="200px" style="background-color: #333">
-    <el-menu text-color="#fff" active-text-color="red" background-color="#333">  <!--默认展开列表-->
-      <!--第1个el-menu   op-->
-      <el-submenu index="1">
-        <template slot="title"><i class="el-icon-user"></i>用户</template>
-          <el-menu-item @click="routeManage('/user')" index="1-1">用户管理</el-menu-item>
-      </el-submenu>
-      <!--第1个el-menu   ed-->
-      <!--第2个el-menu   op-->
+  <div>
+    <el-menu
+      :default-active="activeIndex2"
+      class="el-menu-demo"
+      mode="horizontal"
+      @select="handleSelect"
+      background-color="#545c64"
+      text-color="#fff"
+      active-text-color="#ffd04b"
+    >
+      <el-menu-item index="1">首页</el-menu-item>
       <el-submenu index="2">
-        <template slot="title"><i class="el-icon-user"></i>角色</template>
-          <el-menu-item @click="routeManage('/roles')" index="1-1">角色管理</el-menu-item>
-      </el-submenu>
-      <!--第2个el-menu   ed-->
-      <!--第3个el-menu   op-->
-      <el-submenu index="3">
-        <template slot="title"><i class="el-icon-message"></i>商品管理</template>
-        <el-menu-item-group>
-          <template slot="title">分组一</template>
-          <el-menu-item index="3-1">选项1</el-menu-item>
-          <el-menu-item index="3-2">选项2</el-menu-item>
-        </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="3-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="3-4">
+        <template slot="title">我的工作台</template>
+        <el-menu-item index="2-1">选项1</el-menu-item>
+        <el-menu-item index="2-2">选项2</el-menu-item>
+        <el-menu-item index="2-3">选项3</el-menu-item>
+        <el-submenu index="2-4">
           <template slot="title">选项4</template>
-          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+          <el-menu-item index="2-4-1">选项1</el-menu-item>
+          <el-menu-item index="2-4-2">选项2</el-menu-item>
+          <el-menu-item index="2-4-3">选项3</el-menu-item>
         </el-submenu>
       </el-submenu>
-      <!--第3个el-menu   ed-->
+      <el-menu-item index="3">消息中心</el-menu-item>
+      <el-menu-item index="4">关于我</el-menu-item>
     </el-menu>
-  </el-aside>
-  <!--Aside ed#############################-->
-  <!--Main op#############################-->
-    <el-main>
-    <!--路由显示-->
-    <iframe ref="iframe" src="" frameborder="0" scrolling="yes" height="100%" width="100%"></iframe>
-    </el-main>
-  <!--Main ed#############################-->
-  </el-container>
-  </el-container>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'home',
-  methods: {
-    // 下拉菜单事件判断
-    handleCommand (command) {
-      switch (command) {
-        // 个人信息
-        case 'profile':
-          this.$refs.iframe.src = 'http://localhost:8080/profile'
-          break
-        // 注销
-        case 'clearToken':
-          this.clearToken()
-          break
-        default:
-          break
-      }
-    },
-    handleOpen (key, keyPath) {
-      console.log(key, keyPath)
-    },
-    // iframe实现局部页面显示
-    routeManage (route) {
-      this.$refs.iframe.src = 'http://localhost:8080' + route
-    },
-    // 退出登录，清除token值
-    clearToken () {
-      window.sessionStorage.clear()
-      this.$router.push('/login')
+  data() {
+    return {
+      activeIndex: '1',
+      activeIndex2: '1'
     }
   },
-  data () {
-    return {
-
+  methods: {
+    handleSelect(key, keyPath) {
+      console.log(key, keyPath)
     }
   }
 }
 </script>
 
-<style scoped>
-
-.top{
-  display:flex;
-  color:#eee;
-  line-height: 88px;
-  background-color: #333;
-  justify-content: space-between;
-  padding: 0 1%;
-}
-h2{
-  margin: 0;
-}
-.logo{
-  display: flex;
-  align-items: center;
-}
-.el-dropdown-link{
-  color: #eee;
-  cursor: pointer;
-}
-.el-icon-message,.el-icon-user{
-  color: #eee;
-}
+<style>
 </style>

@@ -1,8 +1,8 @@
 import { request } from './request'
 
-export function loginPost (idData) {
+export function registerPost (idData) {
   return request({
-    url: '/login',
+    url: '/register',
     method: 'post',
     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
     data: idData

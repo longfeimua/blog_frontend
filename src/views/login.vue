@@ -28,8 +28,8 @@ export default {
   data () {
     return {
       form: {
-        name: 'admin',
-        passwd: '123456'
+        name: '',
+        passwd: ''
       },
       rule: {
         name: [
@@ -49,7 +49,8 @@ export default {
           resolve(res)
         })
       }).then(res => {
-        if (res.meta.status === 400) return this.$message.error('用户不存在或密码错误')
+        console.log(res)
+        if (res.status === 'fail') return this.$message.error('用户不存在或密码错误')
         // 登陆成功
         this.$message.success('登陆成功！')
         // 保存 token值

@@ -1,15 +1,17 @@
 import axios from 'axios'
 
-export function request (config) {
+export function request(config) {
   // 创建aioxs实例
   const instance = axios.create({
-    baseURL: 'http://127.0.0.1:8888/api/private/v1/',
+    baseURL: 'http://127.0.0.1:3000/api/v1/',
     timeout: 5000
   })
 
   // 拦截器
   // 1请求拦截
   instance.interceptors.request.use(config => {
+    // 设置请求参数
+    config.headers.Authorization = window.sessionStorage.getItem('token')
     return config
   }, err => {
     console.log(err)
