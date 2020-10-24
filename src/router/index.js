@@ -3,14 +3,18 @@ import VueRouter from 'vue-router'
 
 import Login from '../views/login.vue'
 import Home from '../views/home.vue'
+import register from '../views/register.vue'
+import cardDetail from '../views/home/cardDetail.vue'
 
 Vue.use(VueRouter)
 
 const routes =
   [
-    { path: '/', redirect: '/login' }, // 重定向
+    { path: '/', redirect: '/home' }, // 重定向
     { path: '/login', component: Login },
-    { path: '/home', component: Home }
+    { path: '/regitster', component: register },
+    { path: '/home', component: Home },
+    { path: '/article/:articleId', component: cardDetail }
   ]
 
 const router = new VueRouter({

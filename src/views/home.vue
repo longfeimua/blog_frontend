@@ -1,49 +1,60 @@
 <template>
-  <div>
-    <el-menu
-      :default-active="activeIndex2"
-      class="el-menu-demo"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b"
-    >
-      <el-menu-item index="1">首页</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3">消息中心</el-menu-item>
-      <el-menu-item index="4">关于我</el-menu-item>
-    </el-menu>
+  <div class="back">
+    <el-container class="container">
+      <!-- header -->
+      <el-header class="top">
+        <headtop></headtop>
+      </el-header>
+      <!-- main -->
+      <el-main>
+        <card
+          v-for="value in artData"
+          :key="value.articleId"
+          :article="value"
+        />
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
+import card from './home/card'
+import headtop from './home/headtop'
+import { getArticle } from '../network/home/card'
+
 export default {
   name: 'home',
+  components: {
+    card,
+    headtop
+  },
   data() {
     return {
-      activeIndex: '1',
-      activeIndex2: '1'
+      artData: null
     }
   },
-  methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath)
-    }
+  mounted() {
+    return new Promise((resolve, reject) => {
+      getArticle().then(res => {
+        resolve(res)
+      })
+    }).then(res => {
+      this.artData = res
+      console.log(this.artData)
+    })
   }
 }
 </script>
 
-<style>
+<style scoped>
+.top {
+  color: white;
+}
+.back {
+  background: url(../assets/image/1pxblue.png) repeat;
+}
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
 </style>

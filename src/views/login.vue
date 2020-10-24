@@ -1,18 +1,29 @@
 <template>
   <div class="login_container">
     <div class="login">
-    <div class="pic"><img src="../assets/b8014a90f603738d7c8316c6b11bb051f919ec0d.jpg" alt="img" /></div>
+      <div class="pic">
+        <img
+          src="../assets/image/b8014a90f603738d7c8316c6b11bb051f919ec0d.jpg"
+          alt="img"
+        />
+      </div>
       <!--表单-->
       <el-form ref="form" :model="form" :rules="rule" label-width="80px">
         <el-form-item label="账户" prop="name">
           <el-input v-model="form.name" prefix-icon="el-icon-user"></el-input>
         </el-form-item>
         <el-form-item label="密码">
-          <el-input v-model="form.passwd" type="password" prefix-icon="el-icon-s-promotion"></el-input>
+          <el-input
+            v-model="form.passwd"
+            type="password"
+            prefix-icon="el-icon-s-promotion"
+          ></el-input>
         </el-form-item>
       </el-form>
       <el-row>
-        <el-button type="primary" @click="login" icon="el-icon-s-promotion">登录</el-button>
+        <el-button type="primary" @click="login" icon="el-icon-s-promotion"
+          >登录</el-button
+        >
       </el-row>
       <!--表单-->
       <el-button v-show="false" :plain="true"></el-button>
@@ -25,11 +36,11 @@ import { loginPost } from '../network/login'
 
 export default {
   name: 'login',
-  data () {
+  data() {
     return {
       form: {
-        name: '',
-        passwd: ''
+        name: 'admin',
+        passwd: '123456'
       },
       rule: {
         name: [
@@ -39,26 +50,28 @@ export default {
     }
   },
   methods: {
-    login () {
+    login() {
       // 发送登录信息
       const username = this.form.name
       const password = this.form.passwd
-      // eslint-disable-next-line no-new
       new Promise((resolve, reject) => {
         loginPost({ username: username, password: password }).then(res => {
           resolve(res)
         })
       }).then(res => {
-        console.log(res)
-        if (res.status === 'fail') return this.$message.error('用户不存在或密码错误')
+        if (res.code === -1) return this.$message.error('请输入账号密码')
+        if (res.code === -2) return this.$message.error('账号不存在')
+        if (res.code === -3) return this.$message.error('账号或密码错误')
         // 登陆成功
-        this.$message.success('登陆成功！')
-        // 保存 token值
-        window.sessionStorage.setItem('token', res.data.token)
-        // 保存登陆信息
-        this.$store.commit('login', res.data)
-        // 跳转页面
-        this.$router.push('/home')
+        if (res.code === 1) {
+          this.$message.success('登陆成功！')
+          // 保存 token值
+          window.sessionStorage.setItem('token', res.token)
+          // 保存登陆信息
+          this.$store.commit('login', res)
+          // 跳转页面
+          this.$router.push('/home')
+        }
       })
     }
   }

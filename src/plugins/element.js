@@ -20,7 +20,10 @@ import {
   Table,
   TableColumn,
   Popover,
-  Pagination
+  Pagination,
+  Footer,
+  Col,
+  Card
 } from 'element-ui'
 
 Vue.use(Button)
@@ -44,3 +47,6 @@ Vue.use(Table)
 Vue.use(TableColumn)
 Vue.use(Popover)
 Vue.use(Pagination)
+Vue.use(Footer)
+Vue.use(Col)
+Vue.use(Card)
