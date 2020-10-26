@@ -6,7 +6,7 @@
 
 <script>
 import showdown from 'showdown'
-import { getArticleContent } from '../../network/home/cardDetail'
+import { getArticleContent } from '../../../network/home/cardDetail'
 
 export default {
   name: 'cardDetail',
@@ -30,5 +30,5 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 </style>

@@ -4,22 +4,17 @@ import vuex from 'vuex'
 Vue.use(vuex)
 
 export default new vuex.Store({
+  // 登录状态
   state: {
-    token: '',
-    id: '',
-    email: '',
-    name: ''
+    loginstatu: true
   },
   mutations: {
-    login (state, data) {
-      state.token = data.token
-      state.id = data.id
-      state.email = data.email
-      state.name = data.username
+    login(state, data) {
+      state.loginstatu = data
     }
   },
   getters: {
-    showData (state) {
+    showData(state) {
       return state
     }
   }

@@ -3,7 +3,7 @@
     <el-container class="container">
       <!-- header -->
       <el-header class="top">
-        <headtop></headtop>
+      <nav0></nav0>
       </el-header>
       <!-- main -->
       <el-main>
@@ -19,14 +19,14 @@
 
 <script>
 import card from './home/card'
-import headtop from './home/headtop'
+import nav0 from './home/nav0'
 import { getArticle } from '../network/home/card'
 
 export default {
   name: 'home',
   components: {
     card,
-    headtop
+    nav0
   },
   data() {
     return {
@@ -40,7 +40,7 @@ export default {
       })
     }).then(res => {
       this.artData = res
-      console.log(this.artData)
+      // console.log(this.artData)
     })
   }
 }

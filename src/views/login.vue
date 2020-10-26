@@ -67,8 +67,11 @@ export default {
           this.$message.success('登陆成功！')
           // 保存 token值
           window.sessionStorage.setItem('token', res.token)
+          window.sessionStorage.setItem('loginstatu', true)
+          window.sessionStorage.setItem('username', res.info.username)
+          console.log(res)
           // 保存登陆信息
-          this.$store.commit('login', res)
+          // this.$store.commit('login', false)
           // 跳转页面
           this.$router.push('/home')
         }

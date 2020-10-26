@@ -4,7 +4,8 @@ import VueRouter from 'vue-router'
 import Login from '../views/login.vue'
 import Home from '../views/home.vue'
 import register from '../views/register.vue'
-import cardDetail from '../views/home/cardDetail.vue'
+import cardDetail from '../views/home/cardDetail/cardDetail.vue'
+import writepage from '../views/blog/writepage.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,8 @@ const routes =
     { path: '/login', component: Login },
     { path: '/regitster', component: register },
     { path: '/home', component: Home },
-    { path: '/article/:articleId', component: cardDetail }
+    { path: '/article/:articleId', component: cardDetail },
+    { path: '/write', component: writepage }
   ]
 
 const router = new VueRouter({

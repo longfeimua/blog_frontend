@@ -23,7 +23,8 @@ import {
   Pagination,
   Footer,
   Col,
-  Card
+  Card,
+  Drawer
 } from 'element-ui'
 
 Vue.use(Button)
@@ -50,3 +51,4 @@ Vue.use(Pagination)
 Vue.use(Footer)
 Vue.use(Col)
 Vue.use(Card)
+Vue.use(Drawer)
