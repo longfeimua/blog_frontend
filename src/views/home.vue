@@ -13,20 +13,25 @@
           :article="value"
         />
       </el-main>
+      <el-footer>
+      <pagination></pagination>
+      </el-footer>
     </el-container>
   </div>
 </template>
 
 <script>
 import card from './home/card'
-import nav0 from './home/nav0'
+import nav0 from './home/navTop'
 import { getArticle } from '../network/home/card'
+import pagination from './home/component/pagination'
 
 export default {
   name: 'home',
   components: {
     card,
-    nav0
+    nav0,
+    pagination
   },
   data() {
     return {
@@ -52,9 +57,13 @@ export default {
 }
 .back {
   background: url(../assets/image/1pxblue.png) repeat;
+  height: 100%;
+  overflow: hidden;
 }
 .container {
-  width: 80%;
+  width: 60%;
+  height: 100%;
   margin: 0 auto;
+  overflow: hidden;
 }
 </style>

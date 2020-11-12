@@ -47,7 +47,13 @@ export default {
           resolve(res)
         })
       }).then(res => {
-        console.log(res)
+        if (res.code === 1) {
+          this.$message({
+            message: '保存成功',
+            type: 'success'
+          })
+          this.$router.push('/home')
+        }
       })
     }
   }

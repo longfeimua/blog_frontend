@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from '../views/login.vue'
+import Login from '../views/login/login.vue'
 import Home from '../views/home.vue'
-import register from '../views/register.vue'
+import register from '../views/login/register.vue'
 import cardDetail from '../views/home/cardDetail/cardDetail.vue'
 import writepage from '../views/blog/writepage.vue'
 

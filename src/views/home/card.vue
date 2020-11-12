@@ -4,7 +4,7 @@
       <div slot="header" class="clearfix">
         <span>{{ article.headline }}</span>
         <span style="float: right; padding: 3px 0" type="text">
-        {{ article.author }}—{{ article.date }}</span>
+        {{'作者：' + article.author + '\t' }}{{ '日期：' +  article.date }}</span>
       </div>
       <div class="text item">
         {{ article.describe }}

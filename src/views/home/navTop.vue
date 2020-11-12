@@ -10,7 +10,7 @@
       </el-col>
       <el-col class="top-btn" :span="6">
         <h4 v-if="!offlogin">
-          未登录 <a @click="loginbtn" href="">立即登录</a>
+          未登录 <a @click="loginbtn" id="loginBtn" href="">立即登录</a>
         </h4>
         <h4 v-if="offlogin">{{ greeting + ' ' }}{{username}}</h4>
         <img
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import drawer0 from './nav0/drawer0'
+import drawer0 from './navTop/drawer0'
 
 export default {
   name: 'nav0',
@@ -82,5 +82,8 @@ span {
   position: relative;
   top: -9%;
   cursor: pointer;
+}
+#loginBtn:hover{
+  color: red;
 }
 </style>

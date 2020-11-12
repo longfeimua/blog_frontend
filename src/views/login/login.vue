@@ -3,7 +3,7 @@
     <div class="login">
       <div class="pic">
         <img
-          src="../assets/image/b8014a90f603738d7c8316c6b11bb051f919ec0d.jpg"
+          src="../../assets/image/b8014a90f603738d7c8316c6b11bb051f919ec0d.jpg"
           alt="img"
         />
       </div>
@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { loginPost } from '../network/login'
+import { loginPost } from '../../network/login'
 
 export default {
   name: 'login',
@@ -70,8 +70,6 @@ export default {
           window.sessionStorage.setItem('loginstatu', true)
           window.sessionStorage.setItem('username', res.info.username)
           console.log(res)
-          // 保存登陆信息
-          // this.$store.commit('login', false)
           // 跳转页面
           this.$router.push('/home')
         }
